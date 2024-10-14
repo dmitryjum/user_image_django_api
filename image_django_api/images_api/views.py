@@ -8,11 +8,11 @@ from .serializers import PublicUserSerializer, ImageSerializer
 class RegisterView(generics.CreateAPIView):
   queryset = PublicUser.objects.all()
   permission_classes = (permissions.AllowAny,)
-  serializser_class = PublicUserSerializer
+  serializer_class = PublicUserSerializer
 
 class LoginView(generics.CreateAPIView):
   permission_classes = (permissions.AllowAny,)
-  serializser_class = PublicUserSerializer
+  serializer_class = PublicUserSerializer
 
   def create(self, request, *args, **kwargs):
     username = request.data.get('username')
