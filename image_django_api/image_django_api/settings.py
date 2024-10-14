@@ -52,15 +52,6 @@ REST_FRAMEWORK = {
   ],
 }
 
-DATABASES = {
-    'deafult': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'image_api_db',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-
 AUTH_USER_MODEL = 'images_api.PublicUser'
 
 MIDDLEWARE = [
@@ -99,8 +90,10 @@ WSGI_APPLICATION = 'image_django_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'image_api_db',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
