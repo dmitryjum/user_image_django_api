@@ -2,12 +2,13 @@ import pdb
 import requests
 from django.core.management.base import BaseCommand
 from images_api.models import Image
+from decouple import config
 
 class Command(BaseCommand):
   help = 'Seed the database with images'
 
   def handle(self, *args, **kwargs):
-    url = 'https://picsum.photos/v2/list?page=2&limit=100'
+    url = config('IMAGE_SEED_URL')
     response = requests.get(url)
     if response.status_code == 200:
         images = response.json()
