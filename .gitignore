@@ -1,0 +1,7 @@
+# Django
+   image_django_api/.env
+
+   # Virtual Environment
+   venv/
+   path/
+   .venv/
