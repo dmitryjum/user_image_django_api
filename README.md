@@ -74,11 +74,47 @@ This is a Django REST API that allows users to authenticate, upload images, and 
 - `GET /api/images/?max_width=<width>`: Retrieve images with width <= specified value
 - `GET /api/images/?max_height=<height>`: Retrieve images with height <= specified value
 
-## Testing
+## Automated Testing
 
 Run the test suite with:
 
 python3 manage.py test
+
+## Manual Testing
+
+### Register a New User
+
+To register a new user, use the following `curl` command:
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"username": "your_username", "password": "your_password", "email": "your_email@example.com"}' http://localhost:8000/api/register/
+```
+
+### Login to Obtain a Token
+
+After registering, log in to obtain an authentication token:
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"username": "your_username", "password": "your_password"}' http://localhost:8000/api/login/
+```
+
+The response will include a token:
+
+```json
+{
+    "token": "your_token_here"
+}
+```
+
+### Access the Images Endpoint
+
+Now that you have the token, you can access the `/api/images/` endpoint:
+
+```bash
+curl -H "Authorization: Token your_token_here" http://localhost:8000/api/images/
+```
+
+Replace `your_token_here` with the actual token you received from the login response.
 
 
 ## Contributing
