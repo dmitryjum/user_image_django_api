@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +28,8 @@ SECRET_KEY = 'django-insecure-vx+avi1li2%lfel5j@1==rzoiu+y75+u0bx76_#8xv5oqvi4db
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
 
 # Application definition
@@ -99,6 +103,13 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+# Override with production settings if in production environment
+if ENVIRONMENT == 'production':
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if DATABASE_URL:
+        DATABASES['default'] = dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
+        DATABASES['default']['NAME'] = 'image-api-db-15'
 
 
 # Password validation
