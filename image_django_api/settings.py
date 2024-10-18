@@ -109,8 +109,9 @@ if ENVIRONMENT == 'production':
     DATABASE_URL = os.getenv('DATABASE_URL')
     if DATABASE_URL:
         DATABASES['default'] = dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
-        DATABASES['default']['NAME'] = 'image-api-db-15'
-        DATABASES['default']['PASSWORD'] = DB_PASSWORD
+        DATABASES['default']['NAME'] = 'image-api-db-db'
+        DATABASES['default']['PASSWORD'] = os.getenv('DB_PASSWORD')
+        DATABASES['default']['USERNAME'] = os.getenv('DB_USERNAME')
 
 
 # Password validation
