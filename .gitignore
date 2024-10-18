@@ -1,5 +1,2 @@
 # Django
-image_django_api/.env
-
-# Virtual Environment
-venv/
+.env

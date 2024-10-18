@@ -10,7 +10,9 @@ This is a Django REST API that allows users to authenticate, upload images, and 
   - By author (case-insensitive)
   - By maximum width
   - By maximum height
-- Database seeded with 100 initial images
+- Pagination for image retrieval
+- Database seeded with initial images from an external source
+- Dynamic test data generation for robust testing
 
 ## Technologies Used
 
@@ -19,13 +21,14 @@ This is a Django REST API that allows users to authenticate, upload images, and 
 - Django REST Framework
 - PostgreSQL
 - Docker (for containerization)
+- django-pgbulk (for efficient bulk operations)
 
 ## Setup
 
 1. Clone the repository:
    ```
    git clone https://github.com/yourusername/image-api.git
-   cd image-api
+   cd image_django_api
    ```
 
 2. Set up a virtual environment:
@@ -36,31 +39,37 @@ This is a Django REST API that allows users to authenticate, upload images, and 
 
 3. Install dependencies:
    ```
-   pip install -r requirements.txt
+   python3 -m pip install -r requirements.txt
    ```
 
-4. Set up the PostgreSQL database and update the `DATABASES` configuration in `settings.py`.
-
-5. Run migrations:
+4. Create a `.env` file in the root directory and add the following line:
    ```
-   python manage.py migrate
+   IMAGE_SEED_URL=https://picsum.photos/v2/list?page=2&limit=100
    ```
 
-6. Seed the database with initial images:
+5. Set up the PostgreSQL database and update the `DATABASES` configuration in `settings.py`.
+
+6. Run migrations:
    ```
-   python manage.py seed_images
+   python3 manage.py migrate
    ```
 
-7. Run the development server:
+7. Seed the database with initial images:
    ```
-   python manage.py runserver
+   python3 manage.py seed_images
+   ```
+
+8. Run the development server:
+   ```
+   python3 manage.py runserver
    ```
 
 ## API Endpoints
 
 - `POST /api/register/`: Register a new user
 - `POST /api/login/`: Login and receive an authentication token
-- `GET /api/images/`: Retrieve all images
+- `GET /api/images/`: Retrieve all images (supports pagination)
+- `GET /api/images/?all=true`: Retrieve all images without pagination
 - `GET /api/images/?author=<name>`: Retrieve images by author
 - `GET /api/images/?max_width=<width>`: Retrieve images with width <= specified value
 - `GET /api/images/?max_height=<height>`: Retrieve images with height <= specified value
@@ -70,13 +79,8 @@ This is a Django REST API that allows users to authenticate, upload images, and 
 
 Run the test suite with:
 
-python manage.py test
+python3 manage.py test
 
-## Deployment
-
-This project can be deployed using Docker. Build and run the Docker container:
-docker build -t image-api .
-docker run -p 8000:8000 image-api
 
 ## Contributing
 
