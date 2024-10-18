@@ -1,4 +1,3 @@
-import pdb
 import requests
 from django.core.management.base import BaseCommand
 from images_api.models import Image
@@ -24,13 +23,13 @@ class Command(BaseCommand):
             )
             for image in images
         ]
-        # Perform bulk upsert
+        
         upsert(
             Image,
             data,
-            ["id"],  # Unique constraint fields
+            ["id"],
             ["author", "width", "height", "url", "download_url"],  # Fields to update
-            returning=True  # Optional: return the results of the upsert
+            returning=True
         )
         self.stdout.write(self.style.SUCCESS(f'Successfully seeded {len(images)} images'))
     else:
