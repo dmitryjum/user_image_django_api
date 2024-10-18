@@ -16,10 +16,12 @@ class Image(models.Model):
     url = models.URLField()
     download_url = models.URLField()
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['author'], name='idx_author'),
+            models.Index(fields=['width'], name='idx_width'),
+            models.Index(fields=['height'], name='idx_height'),
+        ]
+
     def __str__(self):
         return f"Image {self.id} by {self.author}"
-    
-    def __repr__(self):
-        return (f"Image(id={self.id!r}, author={self.author!r}, "
-                f"width={self.width!r}, height={self.height!r}, "
-                f"url={self.url!r}, download_url={self.download_url!r})")

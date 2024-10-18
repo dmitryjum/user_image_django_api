@@ -69,11 +69,10 @@ This is a Django REST API that allows users to authenticate, upload images, and 
 - `POST /api/register/`: Register a new user
 - `POST /api/login/`: Login and receive an authentication token
 - `GET /api/images/`: Retrieve all images (supports pagination)
-- `GET /api/images/?all=true`: Retrieve all images without pagination
+- `GET /api/images/?page=2`: Retrieve all images on page 2
 - `GET /api/images/?author=<name>`: Retrieve images by author
 - `GET /api/images/?max_width=<width>`: Retrieve images with width <= specified value
 - `GET /api/images/?max_height=<height>`: Retrieve images with height <= specified value
-- `POST /api/images/`: Upload a new image (authenticated users only)
 
 ## Testing
 
