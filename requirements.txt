@@ -5,7 +5,9 @@ dj-database-url==2.2.0
 Django==5.1.2
 django-pgbulk==3.1.0
 djangorestframework==3.15.2
+gunicorn==23.0.0
 idna==3.10
+packaging==24.1
 psycopg==3.2.3
 python-decouple==3.8
 requests==2.32.3
