@@ -25,9 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-vx+avi1li2%lfel5j@1==rzoiu+y75+u0bx76_#8xv5oqvi4db'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["https://image-django-api.fly.dev", "localhost", "127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = ["https://image-django-api.fly.dev"]  
 
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
@@ -95,23 +96,29 @@ WSGI_APPLICATION = 'image_django_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'image_api_db',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'image_api_db',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    "default": dj_database_url.config(
+        default=os.getenv("DATABASE_URL", "postgres://localhost:5432/image_api_db")
+    )
 }
 
-# Override with production settings if in production environment
-if ENVIRONMENT == 'production':
-    DATABASE_URL = os.getenv('DATABASE_URL')
-    if DATABASE_URL:
-        DATABASES['default'] = dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
-        DATABASES['default']['NAME'] = 'image-api-db-db'
-        DATABASES['default']['PASSWORD'] = os.getenv('DB_PASSWORD')
-        DATABASES['default']['USERNAME'] = os.getenv('DB_USERNAME')
+# # Override with production settings if in production environment
+# if ENVIRONMENT == 'production':
+#     DATABASE_URL = os.getenv('DATABASE_URL')
+#     if DATABASE_URL:
+#         DATABASES['default'] = dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
+#         DATABASES['default']['NAME'] = 'image-api-db-db'
+#         DATABASES['default']['PASSWORD'] = os.getenv('DB_PASSWORD')
+#         DATABASES['default']['USERNAME'] = os.getenv('DB_USERNAME')
 
 
 # Password validation
