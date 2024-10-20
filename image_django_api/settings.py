@@ -27,8 +27,8 @@ SECRET_KEY = 'django-insecure-vx+avi1li2%lfel5j@1==rzoiu+y75+u0bx76_#8xv5oqvi4db
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", False)
 
-ALLOWED_HOSTS = ["https://*.herokuapp.com", "https://image-django-api.fly.dev", "localhost", "127.0.0.1"]
-CSRF_TRUSTED_ORIGINS = ["https://*.herokuapp.com", "https://image-django-api.fly.dev"]  
+ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ["https://image-django-api-33d51ec30738.herokuapp.com/"]  
 
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
