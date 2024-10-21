@@ -20,6 +20,9 @@ class UserAuthTests(TestCase):
     self.assertEqual(response.status_code, status.HTTP_201_CREATED)
     self.assertEqual(PublicUser.objects.count(), 1)
     self.assertEqual(PublicUser.objects.get().username, 'testuser')
+    user = PublicUser.objects.get(username='testuser')
+    self.assertNotEqual(user.password, 'testpassword123')
+    self.assertTrue(user.check_password('testpassword123'))
 
   def test_user_login(self):
     PublicUser.objects.create_user(username = 'testuser', email = 'testuser@example.com', password = 'testpassword123')
