@@ -1,6 +1,7 @@
 # Image API
 
 This is a Django REST API that allows users to authenticate, upload images, and retrieve images based on various filters.
+It is currently deployed to https://image-django-api-33d51ec30738.herokuapp.com/
 
 ## Features
 
@@ -71,8 +72,8 @@ This is a Django REST API that allows users to authenticate, upload images, and 
 - `GET /api/images/`: Retrieve all images (supports pagination)
 - `GET /api/images/?page=2`: Retrieve all images on page 2
 - `GET /api/images/?author=<name>`: Retrieve images by author
-- `GET /api/images/?max_width=<width>`: Retrieve images with width <= specified value
-- `GET /api/images/?max_height=<height>`: Retrieve images with height <= specified value
+- `GET /api/images/?maxWidth=<width>`: Retrieve images with width <= specified value
+- `GET /api/images/?maxWeight=<height>`: Retrieve images with height <= specified value
 
 ## Automated Testing
 
@@ -115,15 +116,3 @@ curl -H "Authorization: Token your_token_here" http://localhost:8000/api/images/
 ```
 
 Replace `your_token_here` with the actual token you received from the login response.
-
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License.
-
-This README provides a comprehensive overview of your project, including its features, setup instructions, API endpoints, and deployment information. As you develop your project, you can update this README to reflect any changes or additional features you implement.
-Remember to replace yourusername in the clone URL with your actual GitHub username or the appropriate repository URL. Also, you may want to adjust the Python and Django versions to match your actual project setup
